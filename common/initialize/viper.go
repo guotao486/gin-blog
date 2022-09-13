@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-08 15:04:25
- * @LastEditTime: 2022-09-08 15:22:24
+ * @LastEditTime: 2022-09-13 17:07:02
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\common\initialize\viper.go
@@ -17,7 +17,7 @@ import (
 )
 
 func LoadConfig() {
-	viper.AddConfigPath("/")
+	viper.AddConfigPath("./")
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	if err := viper.ReadInConfig(); err != nil {
