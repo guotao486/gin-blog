@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-13 15:27:49
- * @LastEditTime: 2022-09-13 17:45:51
+ * @LastEditTime: 2022-09-15 16:59:24
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\controller\channel.go
@@ -31,7 +31,7 @@ var channel service.ChannelService
 
 func ListChannel(c *gin.Context) {
 	list := channel.GetChannelList()
-	gintemplate.HTML(c, http.StatusOK, "channel/list", list)
+	gintemplate.HTML(c, http.StatusOK, "channel/list", gin.H{"clist": list})
 }
 
 func ViewChannel(c *gin.Context) {
@@ -41,7 +41,7 @@ func ViewChannel(c *gin.Context) {
 		id, _ := strconv.Atoi(sid)
 		detail = channel.GetChannel(id)
 	}
-	gintemplate.HTML(c, http.StatusOK, "channel/view", detail)
+	gintemplate.HTML(c, http.StatusOK, "channel/view", gin.H{"channel": detail})
 }
 
 func DeleteChannel(c *gin.Context) {
