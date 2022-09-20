@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-16 09:28:19
- * @LastEditTime: 2022-09-16 09:40:14
+ * @LastEditTime: 2022-09-20 17:40:23
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\common\routers\web.go
@@ -10,6 +10,7 @@
 package routers
 
 import (
+	"gin-blog/common/middleware"
 	"gin-blog/controller"
 	"net/http"
 
@@ -21,6 +22,8 @@ type WebRouter struct {
 }
 
 func (r *WebRouter) Router(engine *gin.Engine) {
+	// session 中间件
+	engine.Use(middleware.Session("admin"))
 	// 静态资源路径
 	engine.Static("/assets", "./assets")
 
@@ -48,6 +51,14 @@ func (r *WebRouter) Router(engine *gin.Engine) {
 
 	admin := engine.Group("/admin", mw)
 	{
+		admin.GET("/login", controller.Login)
+		admin.POST("/login", controller.Login, middleware.UserLog())
+		admin.GET("/regiest", controller.Regiest)
+		admin.GET("/logout", controller.Logout)
+	}
+	{
+		// 权限判断
+		admin.Use(middleware.IsLogin())
 		//index
 		admin.GET("/", controller.AdminIndex)
 	}
@@ -66,4 +77,5 @@ func (r *WebRouter) Router(engine *gin.Engine) {
 
 		admin.POST("/post/upload", controller.UploadThumbnails)
 	}
+
 }

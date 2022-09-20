@@ -1,0 +1,75 @@
+<!--
+ * @Author: GG
+ * @Date: 2022-09-20 14:59:56
+ * @LastEditTime: 2022-09-20 16:30:40
+ * @LastEditors: GG
+ * @Description: 
+ * @FilePath: \gin-blog\templates\backend\login.html
+ * 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 | 后台管理</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="/assets/backend/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/backend/css/adminlte.min.css">
+
+  <link rel="stylesheet" href="/assets/backend/css/style.css">
+
+  <link rel="stylesheet" href="/assets/backend/editormd/css/editormd.min.css">
+
+  <link rel="stylesheet" href="/assets/backend/plugins/bootstrap-taginput/tagsinput.css">
+
+  <link href="/assets/backend/filepond/filepond.css" rel="stylesheet">
+
+  <!-- Add plugin styles -->
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+</head>
+<style>
+    .wrapper {
+        width: 500px;
+        margin: auto;
+        top: 150px;
+    }
+</style>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+    <form action="login" method="post">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" id="username" name="username">
+          <div id="emailHelp" class="form-text red">{{.error}}</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="Remember" name="remember">
+          <label class="form-check-label" for="Remember">记住登录</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      </div>
+</body>
+
+<!-- jQuery -->
+<script src="/assets/backend/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/assets/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/assets/backend/js/adminlte.min.js"></script>
+<script src="/assets/backend/plugins/bootstrap-taginput/tagsinput.js"></script>
+</html>
+
+
+
+            
