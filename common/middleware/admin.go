@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-20 15:49:20
- * @LastEditTime: 2022-09-20 17:41:02
+ * @LastEditTime: 2022-09-21 10:10:16
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\common\middleware\admin.go
@@ -28,10 +28,13 @@ func IsLogin() gin.HandlerFunc {
 		if user != nil {
 			u, err := user.(models.User)
 			if !err || u.ID == 0 {
-				c.Redirect(http.StatusFound, "login")
+				c.Redirect(http.StatusFound, "/admin/login")
 				c.Abort()
 			}
 			c.Next()
+		} else {
+			c.Redirect(http.StatusFound, "/admin/login")
+			c.Abort()
 		}
 	}
 }
