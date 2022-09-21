@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-20 15:00:53
- * @LastEditTime: 2022-09-21 10:19:53
+ * @LastEditTime: 2022-09-21 10:55:53
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\controller\login.go
@@ -10,7 +10,6 @@
 package controller
 
 import (
-	"encoding/gob"
 	"fmt"
 	"gin-blog/common/global"
 	"gin-blog/common/utils"
@@ -40,20 +39,16 @@ func Login(c *gin.Context) {
 			return
 		}
 
-		// session
-		gob.Register(user)
-		session := sessions.Default(c)
-
 		// 记住登录，加长session 时间
 		remember := c.PostForm("remember")
+		maxage := 0
 		fmt.Printf("remember: %v\n", remember)
 		if remember != "" {
-			SessionUtil.SetMaxAge(session, utils.MAX_AGE_REMEMBER)
+			maxage = utils.MAX_AGE_REMEMBER
 		}
 
-		session.Set("userinfo", user)
-		session.Set("userinfo1", models.User{})
-		session.Save()
+		// session
+		SessionUtil.Set(c, "userinfo", user, true, maxage)
 
 		// 放入context上下文,方便中间件调用
 		c.Set("userLogin", user)

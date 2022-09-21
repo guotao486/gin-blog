@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-21 09:45:49
- * @LastEditTime: 2022-09-21 10:42:02
+ * @LastEditTime: 2022-09-21 10:54:30
  * @LastEditors: GG
  * @Description: session util
  * @FilePath: \gin-blog\common\utils\session.go
@@ -10,8 +10,11 @@
 package utils
 
 import (
+	"encoding/gob"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-gonic/gin"
 )
 
 type SessionUtils struct{}
@@ -19,6 +22,7 @@ type SessionUtils struct{}
 const MAX_AGE = 60 * 60               // 60 * 60 1hour
 const MAX_AGE_REMEMBER = 60 * 60 * 24 // 60 * 60 * 24 1day
 
+// session 中间件 默认配置
 func (s *SessionUtils) SessionDefaultConfig() sessions.Store {
 	sessionMaxAge := MAX_AGE
 	sessionSecret := "gin_blog"
@@ -37,4 +41,20 @@ func (s *SessionUtils) SetMaxAge(session sessions.Session, maxage int) sessions.
 		MaxAge: maxage,
 	})
 	return session
+}
+
+// 存储session
+func (s *SessionUtils) Set(ctx *gin.Context, name string, data interface{}, structBool bool, maxage int) {
+	if structBool {
+		gob.Register(data)
+	}
+	session := sessions.Default(ctx)
+
+	if maxage != 0 {
+		session.Options(sessions.Options{
+			MaxAge: maxage,
+		})
+	}
+	session.Set(name, data)
+	session.Save()
 }
