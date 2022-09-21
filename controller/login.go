@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-20 15:00:53
- * @LastEditTime: 2022-09-21 10:55:53
+ * @LastEditTime: 2022-09-21 17:53:18
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\controller\login.go
@@ -33,9 +33,14 @@ func Login(c *gin.Context) {
 		username := c.PostForm("username")
 		password := c.PostForm("password")
 
-		user, exist := UserService.Login(username, password)
+		user, exist := UserService.GetUserByUsername(username)
 		if !exist {
 			gintemplate.HTML(c, http.StatusOK, "login.html", gin.H{"error": "用户不存在"})
+			return
+		}
+
+		if !UserService.ComparePwd(user.Password, password) {
+			gintemplate.HTML(c, http.StatusOK, "login.html", gin.H{"error": "密码不正确"})
 			return
 		}
 
@@ -64,9 +69,11 @@ func Login(c *gin.Context) {
 func Regiest(c *gin.Context) {
 	var user models.User
 	user.Username = "amdin"
-	user.Password = "password"
+	user.Password = UserService.GenPwd("password")
 
-	global.DB.Create(&user)
+	r := global.DB.Table("users").Where("id = ?", 1).Update("password", user.Password)
+	fmt.Printf("r.RowsAffected: %v\n", r.RowsAffected)
+	fmt.Printf("r.Error: %v\n", r.Error)
 }
 
 func Logout(c *gin.Context) {
