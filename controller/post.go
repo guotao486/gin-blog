@@ -1,7 +1,7 @@
 /*
  * @Author: GG
  * @Date: 2022-09-15 11:42:14
- * @LastEditTime: 2022-09-20 17:32:19
+ * @LastEditTime: 2022-09-21 10:33:28
  * @LastEditors: GG
  * @Description:
  * @FilePath: \gin-blog\controller\post.go
@@ -20,7 +20,6 @@ import (
 	"path/filepath"
 	"strconv"
 
-	gintemplate "github.com/foolin/gin-template"
 	"github.com/gin-gonic/gin"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
@@ -33,7 +32,7 @@ var channelService service.ChannelService
 
 func ListPost(c *gin.Context) {
 	plist := postService.GetPostList()
-	gintemplate.HTML(c, http.StatusOK, "post/list", gin.H{"plist": plist})
+	HtmlResponse(c, http.StatusOK, "post/list", gin.H{"plist": plist})
 }
 
 func DetailPost(c *gin.Context) {
@@ -48,7 +47,7 @@ func DetailPost(c *gin.Context) {
 	md = markdown.NormalizeNewlines(md)
 	html := markdown.ToHTML(md, parser, nil)
 
-	gintemplate.HTML(c, http.StatusOK, "post/detail", gin.H{
+	HtmlResponse(c, http.StatusOK, "post/detail", gin.H{
 		"post":    post,
 		"content": template.HTML(html),
 	})
@@ -63,7 +62,7 @@ func ViewPost(c *gin.Context) {
 		post = postService.GetPost(id)
 	}
 	clist := channelService.GetChannelList()
-	gintemplate.HTML(c, http.StatusOK, "post/view", gin.H{
+	HtmlResponse(c, http.StatusOK, "post/view", gin.H{
 		"post":  post,
 		"clist": clist,
 	})

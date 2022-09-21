@@ -1,3 +1,12 @@
+<!--
+ * @Author: GG
+ * @Date: 2022-09-13 16:19:09
+ * @LastEditTime: 2022-09-21 10:38:58
+ * @LastEditors: GG
+ * @Description: 
+ * @FilePath: \gin-blog\templates\backend\channel\list.html
+ * 
+-->
 
 {{ define "content" }}
 <div class="content-wrapper">
@@ -37,7 +46,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{range $i, $c := .clist}}
+                  {{range $i, $c := .data.clist}}
                   <tr>
                     <td>{{$c.Id}}</td>
                     <td>{{$c.Title}}</td>

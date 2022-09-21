@@ -14,20 +14,20 @@
           <!-- /.card-header -->
           <!-- form start -->
           <form id="uploadForm" action="/admin/post/save" method="post">
-
-            <input type="hidden" name="id" value="{{.post.ID}}" />
-            <input type="hidden" id="thumbnail" name="thumbnail" value="{{.post.Thumbnail}}">
-            <input type="hidden" id="tags2" name="tags" value="{{.post.Tags}}">
+      
+            <input type="hidden" name="id" value="{{.data.post.ID}}" />
+            <input type="hidden" id="thumbnail" name="thumbnail" value="{{.data.post.Thumbnail}}">
+            <input type="hidden" id="tags2" name="tags" value="{{.data.post.Tags}}">
             <div class="row">
 
               <div class="col-9">
                 <div class="form-group">
                   <label for="exampleInputEmail1">标题</label>
-                  <input type="text" class="form-control" name="title" value="{{.post.Title}}" placeholder="请输入标题">
+                  <input type="text" class="form-control" name="title" value="{{.data.post.Title}}" placeholder="请输入标题">
                 </div>
 
                 <div class="form-group" id="post_content">
-                  <textarea class="form-control" placeholder="输入内容 ..." name="content">{{.post.Content}}</textarea>
+                  <textarea class="form-control" placeholder="输入内容 ..." name="content">{{.data.post.Content}}</textarea>
                 </div>
 
                 <script src="/assets/backend/editormd/js/jquery.min.js"></script>
@@ -62,8 +62,8 @@
 
                 <div class="form-group">
                   <label>频道</label>
-                  <select name="channelId" class="form-control" data-select="{{.post.ChannelId}}">
-                    {{range $i, $c := .clist}}
+                  <select name="channelId" class="form-control" data-select="{{.data.post.ChannelId}}">
+                    {{range $i, $c := .data.clist}}
                     <option value="{{$c.Id}}">{{$c.Title}}</option>
                     {{end}}
                   </select>
@@ -72,7 +72,7 @@
 
                 <div class="form-group">
                   <label>标签</label><br>
-                  <input type="text" id="tags" data-role="tagsinput" class="form-control" value="{{.post.Tags}}"
+                  <input type="text" id="tags" data-role="tagsinput" class="form-control" value="{{.data.post.Tags}}"
                     placeholder="添加相关标签，逗号分隔 (最多4个)" onchange="tagsChange()">
                 </div>
 

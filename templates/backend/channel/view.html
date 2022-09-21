@@ -1,7 +1,7 @@
 <!--
  * @Author: GG
  * @Date: 2022-09-13 16:19:09
- * @LastEditTime: 2022-09-15 16:58:21
+ * @LastEditTime: 2022-09-21 10:41:35
  * @LastEditors: GG
  * @Description: 
  * @FilePath: \gin-blog\templates\backend\channel\view.html
@@ -24,26 +24,26 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form action="/admin/channel/save" method="post">
-              <input type="hidden" name="id" value="{{.channel.Id}}">
+              <input type="hidden" name="id" value="{{.data.channel.Id}}">
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">标题</label>
-                  <input type="text" class="form-control" name="title" value="{{.channel.Title}}" placeholder="请输入标题">
+                  <input type="text" class="form-control" name="title" value="{{.data.channel.Title}}" placeholder="请输入标题">
                 </div>
                 <div class="form-group">
                   <label>Slug</label>
-                  <input type="text" class="form-control" name="slug" value="{{.channel.Slug}}"  placeholder="请输入slug">
+                  <input type="text" class="form-control" name="slug" value="{{.data.channel.Slug}}"  placeholder="请输入slug">
                 </div>
 
 
                 <div class="form-group">
                   <label>权重</label>
-                  <input type="text" class="form-control" name="weight" value="{{.channel.Weight}}"  placeholder="请输入权重">
+                  <input type="text" class="form-control" name="weight" value="{{.data.channel.Weight}}"  placeholder="请输入权重">
                 </div>
 
                 <div class="form-group">
                   <label>状态</label>
-                  <select name="status" class="form-control" data-select="{{.channel.Status}}">
+                  <select name="status" class="form-control" data-select="{{.data.channel.Status}}">
                     <option value="1">显示</option>
                     <option value="0">隐藏</option>
                   </select>
@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                   <label>内容</label>
-                  <textarea class="form-control" rows="3" placeholder="输入内容 ..." name="content">{{.channel.Content}}</textarea>
+                  <textarea class="form-control" rows="3" placeholder="输入内容 ..." name="content">{{.data.channel.Content}}</textarea>
                 </div>
               
         

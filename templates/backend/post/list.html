@@ -1,3 +1,12 @@
+<!--
+ * @Author: GG
+ * @Date: 2022-09-13 16:19:09
+ * @LastEditTime: 2022-09-21 10:36:18
+ * @LastEditors: GG
+ * @Description: 
+ * @FilePath: \gin-blog\templates\backend\post\list.html
+ * 
+-->
 
 {{ define "content" }}
 <div class="content-wrapper">
@@ -37,7 +46,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{range $i, $p := .plist}}
+                  {{range $i, $p := .data.plist}}
                   <tr>
                     <td>{{$p.ID}}</td>
                     <td>{{$p.Title}}</td>
