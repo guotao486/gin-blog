@@ -75,4 +75,11 @@
 .error {
     color: #b94a48;
 }
-
+.setting-panel{
+    position: absolute;
+    left: 100px;
+    bottom: 0px;
+    height: 50px;
+    line-height: 50px;
+    width: 50px;
+}
